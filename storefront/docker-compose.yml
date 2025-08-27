@@ -1,0 +1,23 @@
+services:
+  storefrontapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash start-dev.sh
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8081:8081"
+      - "5006:5005"
+    volumes:
+      - .:/storefront:z
+    networks:
+      - ecommerce-net
+
+networks:
+  ecommerce-net:
+    name: ecommerce-net
+    external: true
+
+volumes:
+  db:
